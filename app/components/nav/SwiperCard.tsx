@@ -8,7 +8,7 @@ import { Autoplay } from "swiper/modules";
 import type SwiperType from "swiper";
 
 interface SwiperCardProps {
-  item: { card: ReactNode; src?: string }[];
+  item: { id?: number | string; card: ReactNode; src?: string }[];
   paginationImages?: boolean;
   className?: string;
   slidesPerView?: number;
@@ -54,8 +54,8 @@ export default function SwiperCard({
         onSwiper={(instance) => setSwiper(instance)}
         className={`w-full ${className || "h-96"}`}
       >
-        {item.map(({ card, id }, i) => (
-          <SwiperSlide key={id ?? i}>{card}</SwiperSlide>
+        {item.map(({ card, id }, index) => (
+          <SwiperSlide key={id ?? index}>{card}</SwiperSlide>
         ))}
       </Swiper>
 

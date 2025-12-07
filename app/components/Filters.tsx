@@ -35,7 +35,7 @@ const Filters = ({ genres }: { genres: any[] }) => {
               }}
               className={`${
                 activeGenres.includes(genre.id) ? "bg-cyan-400" : ""
-              }  text-base text-white font-semibold  rounded-xl p-2`}
+              }  text-base text-white font-semibold  rounded-xl p-2 hover:cursor-pointer`}
               key={i}
             >
               {genre.name}

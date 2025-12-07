@@ -19,7 +19,7 @@ const Search = () => {
     query: search,
     isDisabled: search === "",
   });
-
+  const safeGames = games || [];
   // Close dropdown on outside click
   useEffect(() => {
     const handler = (e: any) => {
@@ -85,7 +85,7 @@ const Search = () => {
                 </div>
               ))
             ) : games?.data?.results?.length > 0 ? (
-              games.data.results.map((game: any) => (
+              games?.data.results.map((game: any) => (
                 <div
                   key={game.id}
                   className="hover:bg-cyan-600 duration-200 flex flex-col gap-2 px-4 py-2"

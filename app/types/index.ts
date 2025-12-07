@@ -29,6 +29,7 @@ interface Game {
   tags: Tag[];
   esrb_rating: EsrbRating | null;
   short_screenshots: Screenshot[];
+  background_image_additional: string;
 }
 
 interface Rating {

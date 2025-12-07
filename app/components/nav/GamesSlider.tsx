@@ -16,6 +16,8 @@ const GamesSlider = async ({
   big?: boolean;
   screenBig?: boolean;
 }) => {
+  const item = Array.isArray(games) ? games : [];
+
   return (
     <div>
       <div className=" flex flex-col gap-6 mt-14">
@@ -31,7 +33,7 @@ const GamesSlider = async ({
           slidesPerView={slidesPerView || 4}
           item={games.map((game: Game) => {
             return {
-              id: game.id, // ← أضف ID هنا
+              id: game.id,
               card: big ? (
                 <div className=" flex  overflow-hidden items-center bg-main rounded-2xl">
                   <div className=" flex w-[60%] px-6  flex-col items-start ">

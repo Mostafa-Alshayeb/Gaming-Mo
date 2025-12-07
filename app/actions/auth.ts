@@ -17,7 +17,7 @@ interface SignUpData {
   name: string;
   email: string;
   password: string;
-  avatar: { secure_url: string; public_id: string };
+  avatar?: { secure_url: string; public_id: string };
 }
 
 // SIGN UP
@@ -81,7 +81,8 @@ export const protect = async () => {
   if (!token)
     return { error: "you are not authorized to preform this action"! };
   let decode;
-  decode = jwt.verify(token, process.env.JWT_SECRET!!);
+  decode = jwt.verify(token, process.env.JWT_SECRET!);
+
   if (!decode)
     return { error: "you are not authorized to preform this action"! };
   return { decode };
@@ -90,7 +91,7 @@ export const protect = async () => {
 // GET USER
 export const getUser = async () => {
   try {
-    connect();
+    await connect();
     const { decode } = await protect();
     const user = await User.findById((decode as any).id);
     if (!user)

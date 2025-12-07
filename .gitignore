@@ -91,3 +91,5 @@ public/uploads/
 docker-data/
 docker-volume/
 docker-compose.override.yml
+
+.vercel

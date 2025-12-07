@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { log } from "console";
 dotenv.config();
 let cached = (global as any).mongoose || { conn: null, promise: null };
 
@@ -7,7 +8,7 @@ export const connect = async () => {
   if (cached.conn) return cached.conn;
   if (!cached.promise) {
     cached.promise = mongoose
-      .connect(process.env.MONGO_URI!, {
+      .connect(process.env.MONGODB_URI!, {
         dbName: "mygames",
         bufferCommands: false,
       })

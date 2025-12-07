@@ -1,9 +1,7 @@
 import { getGame } from "@/app/api/api";
 import GamesSlider from "@/app/components/nav/GamesSlider";
 import SwiperCard from "@/app/components/nav/SwiperCard";
-
 import Image from "next/image";
-import React from "react";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
@@ -13,8 +11,14 @@ const page = async ({ params }: { params: { id: string } }) => {
     screenshots,
     data,
     similar,
-  }: { screenshots: any[]; data: Game; similar: any[] } = game;
+  }: {
+    screenshots: { results: any[] };
+    data: Game;
+    similar: { results: any[] };
+  } = game;
   console.log(data.ratings);
+  console.log("SCREENSHOTS", screenshots);
+
   return (
     <div className=" mt-10">
       <div>
@@ -25,28 +29,29 @@ const page = async ({ params }: { params: { id: string } }) => {
           </div>
           <SwiperCard
             slidesPerView={1}
-            className=" h-full"
+            className="h-full"
             item={[
-              ...screenshots.results,
+              // عناصر background_image و background_image_additional
               data.background_image,
               data.background_image_additional,
-            ].map((screenshot) => {
-              return {
-                card: (
-                  <div className=" rounded-xl overflow-hidden h-[36rem] w-full relative">
-                    <Image
-                      src={screenshot.image || screenshot}
-                      alt={data.name}
-                      fill
-                      className=" object-cover"
-                    />
-                  </div>
-                ),
-                src: screenshot.image || screenshot,
-              };
-            })}
+              ...screenshots.results.map((screenshot) => screenshot.image),
+            ].map((src, index) => ({
+              id: index,
+              card: (
+                <div className="rounded-xl overflow-hidden h-[36rem] w-full relative">
+                  <Image
+                    src={src}
+                    alt={data.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ),
+              src,
+            }))}
             paginationImages
           />
+
           <p className=" mt-10 col-span-2 text-white  text-base">
             {data.description_raw}
           </p>

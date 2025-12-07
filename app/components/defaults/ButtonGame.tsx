@@ -26,7 +26,7 @@ const ButtonGame = ({
         className || ""
       }  relative px-4 flex-initial text-white gap-2 py-2 min-w-[80px] duration-150 hover:text-cyan-300 cursor-pointer text-center m-auto`}
     >
-      {ButtonSvg(false)}
+      {ButtonSvg({ white: false })}
       <span className="relative">
         {disabled ? <Spinner /> : link ? <Link href={link}>{text}</Link> : text}
       </span>

@@ -11,6 +11,7 @@ import React from "react";
 const page = () => {
   const { wishlist } = useWishlsit();
   const { games, isLoading } = useGetGamesWithIds(wishlist);
+  const safeGmaes = games || [];
   console.log(games);
   return (
     <div className=" mt-10 flex flex-col gap-4">
@@ -18,7 +19,7 @@ const page = () => {
       <GridContainer className="  gap-5 " cols={4}>
         {isLoading ? (
           <GameSkeleton />
-        ) : games?.length > 0 ? (
+        ) : safeGmaes?.length > 0 ? (
           games?.map((game: any, i) => (
             <GameCard
               key={i}

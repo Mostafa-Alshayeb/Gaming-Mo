@@ -146,9 +146,15 @@ export const getGame = async function (id: string) {
     const screenshots = await fetchFn(
       `${APIURL}games/${id}/screenshots?key=${KEY}`
     );
-    const similar = await fetchFn(
+
+    // -----------------------------
+    // FIX: ensure "similar" always an object
+    // -----------------------------
+    const similarRes = await fetchFn(
       `${APIURL}games/${id}/game-series?key=${KEY}`
     );
+
+    const similar = similarRes?.results ? similarRes : { results: [] };
 
     return { data, screenshots, similar };
   } catch (err) {

@@ -20,7 +20,7 @@ const GameCard = ({
 }: {
   game: Game;
   wishlist?: boolean;
-  screenBig: boolean;
+  screenBig?: boolean;
 }) => {
   console.log(game);
   return (

@@ -9,7 +9,7 @@ const GridContainer = ({
   children: ReactNode;
   className?: string;
 }) => {
-  const gridClasses = {
+  const gridClasses: { [key: number]: string } = {
     1: `grid grid-cols-1`,
     2: `grid grid-cols-2`,
     3: `grid grid-cols-3`,
@@ -25,7 +25,7 @@ const GridContainer = ({
   };
 
   return (
-    <div className={`grid ${className || ""} ${gridClasses[cols]}`}>
+    <div className={`grid ${className || ""} ${gridClasses[cols] || ""}`}>
       {children}
     </div>
   );
