@@ -18,6 +18,13 @@ const GamesSlider = async ({
 }) => {
   const item = Array.isArray(games) ? games : [];
 
+  const responsiveSlides = {
+    320: { slidesPerView: 1 },
+    640: { slidesPerView: 2 },
+    768: { slidesPerView: 3 },
+    1024: { slidesPerView: slidesPerView || 4 },
+  };
+
   return (
     <div>
       <div className=" flex flex-col gap-6 mt-14">
@@ -31,6 +38,7 @@ const GamesSlider = async ({
         <SwiperCard
           className=" h-full"
           slidesPerView={slidesPerView || 4}
+          breakpoints={responsiveSlides}
           item={games.map((game: Game) => {
             return {
               id: game.id,

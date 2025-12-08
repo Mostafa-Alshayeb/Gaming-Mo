@@ -6,6 +6,7 @@ import { ReactNode, useEffect, useState } from "react";
 import Image from "next/image";
 import { Autoplay } from "swiper/modules";
 import type SwiperType from "swiper";
+import { SwiperOptions } from "swiper/types";
 
 interface SwiperCardProps {
   item: { id?: number | string; card: ReactNode; src?: string }[];
@@ -13,6 +14,7 @@ interface SwiperCardProps {
   className?: string;
   slidesPerView?: number;
   autoplay?: number;
+  breakpoints?: { [width: number]: SwiperOptions };
 }
 
 export default function SwiperCard({
@@ -21,6 +23,7 @@ export default function SwiperCard({
   className,
   slidesPerView,
   autoplay,
+  breakpoints,
 }: SwiperCardProps) {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [progress, setProgress] = useState(0);
@@ -53,6 +56,7 @@ export default function SwiperCard({
         slidesPerView={slidesPerView || 1}
         onSwiper={(instance) => setSwiper(instance)}
         className={`w-full ${className || "h-96"}`}
+        breakpoints={breakpoints}
       >
         {item.map(({ card, id }, index) => (
           <SwiperSlide key={id ?? index}>{card}</SwiperSlide>

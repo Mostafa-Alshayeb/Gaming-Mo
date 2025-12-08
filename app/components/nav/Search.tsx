@@ -8,7 +8,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import Image from "next/image";
 import MotionItem from "../defaults/MotionItem";
-import { Input } from "@/components/ui/input";
 
 const Search = () => {
   const [query, setQuery] = useState("");
@@ -20,6 +19,7 @@ const Search = () => {
     query: search,
     isDisabled: search === "",
   });
+
   useEffect(() => {
     const handler = (e: any) => {
       if (outsideRef.current && !outsideRef.current.contains(e.target)) {
@@ -40,7 +40,9 @@ const Search = () => {
   return (
     <div
       ref={outsideRef}
-      className="w-full flex relative group items-center gap-2 justify-between px-4 border border-input rounded-xl md:w-[40%] bg-main"
+      className={
+        "relative w-full flex items-center gap-2 px-3 py-2 border border-input rounded-xl bg-main md:w-[60%] lg:w-[40%]"
+      }
     >
       <input
         value={query}
@@ -49,18 +51,18 @@ const Search = () => {
           setQuery(e.target.value);
         }}
         placeholder="Search games..."
-        className="py-2 text-base w-full bg-transparent text-gray-50 border-none outline-none placeholder:text-gray-400  "
+        className="w-full bg-transparent text-gray-50 text-base py-2 px-2 outline-none placeholder:text-gray-400"
       />
 
       <div className="flex items-center gap-2">
         <XIcon
-          className="cursor-pointer"
+          className="cursor-pointer w-5 h-5 text-gray-400 hover:text-cyan-400 transition-colors"
           onClick={() => {
             setQuery("");
             setSearch("");
           }}
         />
-        <SearchIcon className="w-5 h-5 cursor-pointer group-hover:text-cyan-400 duration-150" />
+        <SearchIcon className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 duration-150" />
       </div>
 
       <AnimatePresence>
@@ -69,17 +71,17 @@ const Search = () => {
             initial={{ height: 0, opacity: 0 }}
             whileInView={{ height: "auto", opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute w-full top-full z-50 bg-[#222425] rounded-2xl shadow-sm max-h-[40vh] overflow-y-scroll left-0"
+            className="absolute top-full left-0 w-full z-50 bg-[#222425] rounded-2xl shadow-sm max-h-[50vh] overflow-y-auto mt-2"
           >
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => (
                 <div
                   key={i}
-                  className="space-y-2 flex items-start gap-2 px-4 py-2"
+                  className="flex items-start gap-2 px-4 py-2 space-y-2"
                 >
                   <Skeleton className="h-20 w-[40%] rounded-2xl" />
-                  <div className="flex flex-col gap-3">
-                    <Skeleton className="h-4 w-[150px]" />
+                  <div className="flex flex-col gap-2 w-[60%]">
+                    <Skeleton className="h-4 w-[80%]" />
                   </div>
                 </div>
               ))
@@ -87,14 +89,14 @@ const Search = () => {
               games?.data.results.map((game: any) => (
                 <div
                   key={game.id}
-                  className="hover:bg-cyan-600 duration-200 flex flex-col gap-2 px-4 py-2"
+                  className="flex flex-col gap-2 px-4 py-2 hover:bg-cyan-600 transition-colors duration-200"
                 >
                   <Link
                     href={`/game/${game.id}`}
                     className="flex gap-3 items-start w-full h-full"
                     onClick={() => setActive(false)}
                   >
-                    <div className="rounded-2xl relative overflow-hidden w-[40%] bg-neutral-900 h-20">
+                    <div className="relative overflow-hidden w-[40%] h-20 rounded-2xl bg-neutral-900 flex-shrink-0">
                       <Image
                         src={game.background_image || fallbackImg}
                         alt={game.name}
@@ -102,12 +104,14 @@ const Search = () => {
                         className="object-cover"
                       />
                     </div>
-                    <h1 className="font-semibold text-white">{game.name}</h1>
+                    <h1 className="font-semibold text-white text-sm sm:text-base truncate">
+                      {game.name}
+                    </h1>
                   </Link>
                 </div>
               ))
             ) : (
-              <p className="text-center text-white py-4">
+              <p className="text-center text-white py-4 text-sm sm:text-base">
                 No games found with "{search}"
               </p>
             )}

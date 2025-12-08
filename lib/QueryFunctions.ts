@@ -22,7 +22,7 @@ export const useGetGamesWithIds = (ids: string[]) => {
 export const useGetGames = ({
   query = "",
   page = 1,
-  pageSize = 21,
+  pageSize = 22,
   filters = [],
   isDisabled = false,
 }: {
