@@ -9,7 +9,7 @@ export const connect = async () => {
       cached.promise ||
       mongoose
         .connect(process.env.MONGODB_URI!, {
-          dbName: "learning",
+          dbName: "mygames",
           bufferCommands: false,
         })
         .then((mongoose) => {

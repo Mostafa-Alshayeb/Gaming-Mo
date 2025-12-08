@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import Image from "next/image";
 import MotionItem from "../defaults/MotionItem";
+import { Input } from "@/components/ui/input";
 
 const Search = () => {
   const [query, setQuery] = useState("");
@@ -19,8 +20,6 @@ const Search = () => {
     query: search,
     isDisabled: search === "",
   });
-  const safeGames = games || [];
-  // Close dropdown on outside click
   useEffect(() => {
     const handler = (e: any) => {
       if (outsideRef.current && !outsideRef.current.contains(e.target)) {
@@ -50,7 +49,7 @@ const Search = () => {
           setQuery(e.target.value);
         }}
         placeholder="Search games..."
-        className="py-2 text-base w-full bg-transparent text-gray-50 border-none outline-none placeholder:text-gray-400"
+        className="py-2 text-base w-full bg-transparent text-gray-50 border-none outline-none placeholder:text-gray-400  "
       />
 
       <div className="flex items-center gap-2">
