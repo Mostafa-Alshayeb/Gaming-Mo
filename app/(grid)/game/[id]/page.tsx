@@ -4,7 +4,7 @@ import SwiperCard from "@/app/components/nav/SwiperCard";
 import Image from "next/image";
 
 const page = async ({ params }: { params: { id: string } }) => {
-  const { id } = await params;
+  const { id } = await Promise.resolve(params); // ✅ هيك params بصير Promise
   const game = await getGame(id);
   console.log(game);
   const {
