@@ -39,7 +39,7 @@ const NavBar = ({ setOpen }: { setOpen: (v: boolean) => void }) => {
               <ButtonGame
                 text="Sign Up"
                 link="/signup"
-                className="text-sm sm:text-base md:px-4 lg:px-3"
+                className="text-sm sm:text-base "
               />
             </div>
           )}
