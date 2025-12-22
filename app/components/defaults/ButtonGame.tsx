@@ -1,13 +1,12 @@
-"use clinet";
+"use client";
 
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import React, { ReactElement } from "react";
 import ButtonSvg from "../nav/ButtonSvg";
-import Link from "next/link";
 import Spinner from "./Spinner";
-import { fa } from "zod/v4/locales";
+
 const ButtonGame = ({
-  className,
+  className = "",
   onClick,
   link,
   text,
@@ -21,17 +20,47 @@ const ButtonGame = ({
   icon?: ReactElement;
   disabled?: boolean;
 }) => {
-  return (
-    <button
-      className={`${
-        className || ""
-      }  relative px-4 flex-initial text-white gap-2 py-2 min-w-[80px] duration-150 hover:text-cyan-300 cursor-pointer text-center m-auto`}
-    >
-      {ButtonSvg({ white: false })}
-      <span className="relative">
-        {disabled ? <Spinner /> : link ? <Link href={link}>{text}</Link> : text}
+  const content = (
+    <>
+      <ButtonSvg white={false} />
+      <span className="relative z-10 whitespace-nowrap">
+        {disabled ? <Spinner /> : text}
       </span>
-      {icon && icon}
+      {icon && <span className="relative z-10">{icon}</span>}
+    </>
+  );
+
+  return link ? (
+    <Link
+      href={link}
+      className={`
+        relative flex items-center justify-center
+        h-[44px] min-w-[100px]
+        px-4 gap-2
+        text-white text-sm sm:text-base
+        hover:text-cyan-300
+        transition
+        ${className}
+      `}
+    >
+      {content}
+    </Link>
+  ) : (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`
+        relative flex items-center justify-center
+        h-[44px] min-w-[100px]
+        px-4 gap-2
+        text-white text-sm sm:text-base
+        hover:text-cyan-300
+        transition
+        disabled:opacity-50
+        ${className}
+      `}
+    >
+      {content}
     </button>
   );
 };
